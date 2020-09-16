@@ -4,6 +4,6 @@ using System.Collections;
 
 class Properties : MonoBehaviour
 {
-  public static float speed;
-  public static float Rotatespeed;
+  public float Speed {get; protected set;} // this Speed value for move (can't set value in other class)
+  public float RotateSpeed {get; protected set;} // Rotatespeed value for Rotate (can't set value in other class)
 }
