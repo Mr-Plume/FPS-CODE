@@ -4,7 +4,7 @@
 using System;
 using UnityEngine;
 
-namespace DefaultNamespace.Scenes
+namespace DefaultNamespace // change namespace dont forget
 {
     public class Movement : MonoBehaviour
     {
