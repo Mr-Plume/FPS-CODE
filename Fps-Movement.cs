@@ -22,6 +22,8 @@ namespace DefaultNamespace // change namespace dont forget
         [SerializeField] private bool jumpReady;
         [SerializeField] private int layerNumber; // add a your layer number for jumping
         [SerializeField] private PhysicMaterial floorMaterial; // for friction
+        [SerializeField] private GameObject camera;
+
         private void Awake()
         {
             // I freeze rotation in order not to fall.
@@ -73,44 +75,37 @@ namespace DefaultNamespace // change namespace dont forget
             crouch = Input.GetKey(KeyCode.LeftControl); // crouch
             crouchStart = Input.GetKeyDown(KeyCode.LeftControl); // Start Crouch
             crouchend = Input.GetKeyUp(KeyCode.LeftControl); // crouch end
+        }
+
+        private void MovementF()
+        {
+            rb.velocity += new Vector3(x, 0, z) * speed; // always use Time.deltaTime for smooth movement
+            if(crouch && Input.GetKey(KeyCode.W)){rb.AddForce(0 , 0 , 30);}
+        }
+
+        // Crouch Function
+        private void CrouchF()
+        {
             
             if(crouch && Input.GetKey(KeyCode.W)) // if player press crouch and w start crouch
             {
+                camera.transform.eulerAngles = new Vector3(5 , 0 , 0);
                 speed = 0;
                 floorMaterial.dynamicFriction = 0.5f;
-                transform.eulerAngles = new Vector3(-10 , 0 , 0);
+                transform.eulerAngles = new Vector3(-30 , 0 , 0);
             }
 
-            if (crouchStart) // reduce speed while squatting
+            if (crouchStart && !Input.GetKey(KeyCode.W)) // reduce speed while squatting
             {
                 transform.localScale = crouchScale;
             }
 
             if (crouchend)
             {
+                camera.transform.eulerAngles = new Vector3(0, 0, 0);
                 transform.eulerAngles = new Vector3(0 , 0 , 0);
                 speed = 1;
                 floorMaterial.dynamicFriction = 2f;
-                transform.localScale = defaultScale;
-            }
-        }
-
-        private void MovementF()
-        {
-            rb.velocity += new Vector3(x, 0, z) * speed; // always use Time.deltaTime for smooth movement
-            if(crouch && Input.GetKey(KeyCode.W)){rb.AddForce(0 , -20 , 20);}
-        }
-
-        // Crouch Function
-        private void CrouchF()
-        {
-            if (crouch) // if crouch is true set a transform.localScale
-            {
-                transform.localScale = crouchScale;
-            }
-            
-            if(crouchend)
-            {
                 transform.localScale = defaultScale;
             }
         }
