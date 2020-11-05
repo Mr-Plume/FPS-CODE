@@ -30,8 +30,8 @@ namespace DefaultNamespace // change namespace dont forget
             rb.constraints = RigidbodyConstraints.FreezeRotation;
 
             //Friction for movement
-            floorMaterial.dynamicFriction = 2.5f;
-            floorMaterial.staticFriction = 2.5f;
+            floorMaterial.dynamicFriction = 2f;
+            floorMaterial.staticFriction = 2f;
         }
 
         private void Start()
@@ -61,7 +61,7 @@ namespace DefaultNamespace // change namespace dont forget
             MovementF();
             
             //extra gravity for realistic movement
-            rb.AddForce(0 , -20 , 0); // change by yourself
+            rb.AddForce(0 , -25 , 0); // change by yourself
         }
 
         private void MyInputF()
@@ -89,10 +89,10 @@ namespace DefaultNamespace // change namespace dont forget
             
             if(crouch && Input.GetKey(KeyCode.W)) // if player press crouch and w start crouch
             {
-                camera.transform.eulerAngles = new Vector3(5 , 0 , 0);
+                camera.transform.eulerAngles = new Vector3(25 , 0 , 0);
                 speed = 0;
                 floorMaterial.dynamicFriction = 0.5f;
-                transform.eulerAngles = new Vector3(-30 , 0 , 0);
+                transform.eulerAngles = new Vector3(-20 , 0 , 0);
             }
 
             if (crouchStart && !Input.GetKey(KeyCode.W)) // reduce speed while squatting
