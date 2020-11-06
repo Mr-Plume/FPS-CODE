@@ -30,10 +30,5 @@ public class RotateCamera : MonoBehaviour
         playerX = new Vector3(0 , MouseX , 0);
         
         player.transform.eulerAngles = playerX;
-        
-        if (MouseX == 0 | MouseY == 0)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
     }
 }
