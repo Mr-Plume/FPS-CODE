@@ -12,8 +12,8 @@ public class RotateCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    public float speedH = 2.0f;
-    public float speedV = 2.0f;
+    [SerializeField] private float speedHorizontal = 24.0f;
+    [SerializeField] private float speedVertical = 24.0f;
 
     private float MouseX = 0.0f;
     private float MouseY = 0.0f;
@@ -23,8 +23,8 @@ public class RotateCamera : MonoBehaviour
 
     void Update()
     {
-        MouseX += speedH * Time.fixedDeltaTime * Input.GetAxis("Mouse X");
-        MouseY -= speedV * Time.fixedDeltaTime * Input.GetAxis("Mouse Y");
+        MouseX += speedHorizontal * Time.fixedDeltaTime * Input.GetAxis("Mouse X");
+        MouseY -= speedVertical * Time.fixedDeltaTime * Input.GetAxis("Mouse Y");
 
         transform.localEulerAngles = new Vector3(Mathf.Clamp(MouseY , -90 , 90) , 0f , 0f);
         playerX = new Vector3(0 , MouseX , 0);
