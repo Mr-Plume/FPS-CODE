@@ -17,18 +17,20 @@ public class RotateCamera : MonoBehaviour
 
     private float MouseX = 0.0f;
     private float MouseY = 0.0f;
+
+    public Vector3 playerX {get; private set;}
     [SerializeField] private GameObject player;
 
-    void Update ()
+    void Update()
     {
         MouseX += speedH * Time.fixedDeltaTime * Input.GetAxis("Mouse X");
         MouseY -= speedV * Time.fixedDeltaTime * Input.GetAxis("Mouse Y");
 
-        transform.localEulerAngles = new Vector3(MouseY , 0f , 0f);
-        Vector3 playerX = new Vector3(0 , MouseX , 0);
+        transform.localEulerAngles = new Vector3(Mathf.Clamp(MouseY , -90 , 90) , 0f , 0f);
+        playerX = new Vector3(0 , MouseX , 0);
         
-        player.transform.localRotation = Quaternion.Euler(playerX);
-
+        player.transform.eulerAngles = playerX;
+        
         if (MouseX == 0 | MouseY == 0)
         {
             Cursor.lockState = CursorLockMode.Locked;
